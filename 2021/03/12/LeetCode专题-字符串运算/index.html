@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="LeetCode224 基本计算器给你一个字符串表达式 s ，请你实现一个基本计算器来计算并返回它的值。整数除法仅保留整数部分。  1 &lt;&#x3D; s.length &lt;&#x3D; 3 * 105 s 由整数和算符 (‘+’, ‘-‘, ‘*’, ‘&#x2F;‘) 组成，中间由一些空格隔开 s 表示一个 有效表达式 表达式中的所有整数都是非负整数，且在范围 [0, 231 - 1] 内。题目数据保证答案是一个">
+  <meta name="description" content="基本计算器类型的解题思路，我们用$curNum$表示前解析得到的数字（这里的解析可能是从基本计算器表达式中直接获取的连续的数字解析得到的数字，也有可能是一个’(‘和’)’内的表达式求解的最终值，具体的我们可以在下面看到），$lastNum$ 表示上一个经解析得到的数字，$lastOperator$表示$curNum$前面的运算符。  如果字符为’+’、’-‘符号则将’+’、’-‘符号前解析得到的数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode专题-字符串运算">
+<meta property="og:title" content="Leetcode专题-字符串运算">
 <meta property="og:url" content="http://example.com/2021/03/12/LeetCode%E4%B8%93%E9%A2%98-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97/index.html">
 <meta property="og:site_name" content="zbtmaker">
-<meta property="og:description" content="LeetCode224 基本计算器给你一个字符串表达式 s ，请你实现一个基本计算器来计算并返回它的值。整数除法仅保留整数部分。  1 &lt;&#x3D; s.length &lt;&#x3D; 3 * 105 s 由整数和算符 (‘+’, ‘-‘, ‘*’, ‘&#x2F;‘) 组成，中间由一些空格隔开 s 表示一个 有效表达式 表达式中的所有整数都是非负整数，且在范围 [0, 231 - 1] 内。题目数据保证答案是一个">
+<meta property="og:description" content="基本计算器类型的解题思路，我们用$curNum$表示前解析得到的数字（这里的解析可能是从基本计算器表达式中直接获取的连续的数字解析得到的数字，也有可能是一个’(‘和’)’内的表达式求解的最终值，具体的我们可以在下面看到），$lastNum$ 表示上一个经解析得到的数字，$lastOperator$表示$curNum$前面的运算符。  如果字符为’+’、’-‘符号则将’+’、’-‘符号前解析得到的数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-12T14:15:08.780Z">
-<meta property="article:modified_time" content="2021-03-13T00:36:16.080Z">
+<meta property="article:modified_time" content="2021-03-14T15:07:51.026Z">
 <meta property="article:author" content="邹柏涛">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>LeetCode专题-字符串运算 | zbtmaker</title>
+  <title>Leetcode专题-字符串运算 | zbtmaker</title>
   
 
 
@@ -165,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LeetCode专题-字符串运算
+          Leetcode专题-字符串运算
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-13 08:36:16" itemprop="dateModified" datetime="2021-03-13T08:36:16+08:00">2021-03-13</time>
+                <time title="修改时间：2021-03-14 23:07:51" itemprop="dateModified" datetime="2021-03-14T23:07:51+08:00">2021-03-14</time>
               </span>
 
           
@@ -196,7 +196,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h5 id="LeetCode224-基本计算器"><a href="#LeetCode224-基本计算器" class="headerlink" title="LeetCode224 基本计算器"></a>LeetCode224 基本计算器</h5><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。整数除法仅保留整数部分。</p>
+        <p>基本计算器类型的解题思路，我们用$curNum$表示前解析得到的数字（这里的解析可能是从基本计算器表达式中直接获取的连续的数字解析得到的数字，也有可能是一个’(‘和’)’内的表达式求解的最终值，具体的我们可以在下面看到），$lastNum$ 表示上一个经解析得到的数字，$lastOperator$表示$curNum$前面的运算符。</p>
+<ul>
+<li>如果字符为’+’、’-‘符号则将’+’、’-‘符号前解析得到的数字余最终结果做加减运算</li>
+<li>如果字符为’*‘、’/‘符号则判断’*‘,’/‘前面一个数字前面的符号是’+’、’-‘还是’*‘,’/‘。如果前面一个符号是’+’、’-‘符合，那么运算符解析的数字$curNum$就可以赋值给$lastNum$（$lastNum$默认为0）；如果前面一个符号是’*‘、’/‘，那么就表明我们需要把$curNum$添加到$lastNum$计算值中。</li>
+<li>如果字符为’(‘，那么其实就是递归调用上面两个步骤（联合），然后碰到’)’就结束这个循环，递归调用的返回值看成是一个字符解析过程（将递归调用返回值赋值给$curNum$）；</li>
+</ul>
+<a id="more"></a>
+
+
+
+<h5 id="LeetCode224-基本计算器I"><a href="#LeetCode224-基本计算器I" class="headerlink" title="LeetCode224 基本计算器I"></a>LeetCode224 基本计算器I</h5><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。整数除法仅保留整数部分。</p>
 <ul>
 <li>1 &lt;= s.length &lt;= 3 * 105</li>
 <li>s 由整数和算符 (‘+’, ‘-‘, ‘*’, ‘/‘) 组成，中间由一些空格隔开</li>
@@ -222,7 +232,7 @@
 <p>1 + 3 * 2</p>
 <p>最终的代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> curNum = <span class="number">0</span>, lastNum = <span class="number">0</span>, result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> lastOperator = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(ch &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">                curNum = curNum * <span class="number">10</span> + (ch - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(ch == <span class="string">&#x27;+&#x27;</span> || ch == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                    result += curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                    result -= curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                    result += lastNum * curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result += lastNum / curNum;</span><br><span class="line">                &#125;</span><br><span class="line">                curNum = <span class="number">0</span>;</span><br><span class="line">                lastOperator = ch;</span><br><span class="line">                lastNum = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(ch == <span class="string">&#x27;*&#x27;</span> || ch == <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = -curNum;</span><br><span class="line">                &#125; <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = lastNum * curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = lastNum / curNum;</span><br><span class="line">                &#125;</span><br><span class="line">                curNum = <span class="number">0</span>;</span><br><span class="line">                lastOperator = ch;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//空字符串不做处理</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">            result += curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">            result -= curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(lastOperator == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">            result += lastNum * curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result += lastNum / curNum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="LeetCode224-基本计算器-1"><a href="#LeetCode224-基本计算器-1" class="headerlink" title="LeetCode224 基本计算器"></a>LeetCode224 基本计算器</h5><p>题目描述：</p>
+<h5 id="LeetCode224-基本计算器II"><a href="#LeetCode224-基本计算器II" class="headerlink" title="LeetCode224 基本计算器II"></a>LeetCode224 基本计算器II</h5><p>题目描述：</p>
 <p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
 <p>示例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;1 + 1&quot;</span></span><br><span class="line">输出：2</span><br><span class="line"></span><br><span class="line">输入：s = <span class="string">&quot;(1+(4+5+2)-3)+(6+8)&quot;</span></span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure>
@@ -236,6 +246,8 @@
 <p>解析数字和LeetCode224一样，用curName和lastNum来记录当前有效数字和上一个有效数字，同样用一个lastOperator来记录上一个遇到的字符。每次遇到’+’或者’-‘就可以计算上个数字和当前字符以及操作符之间的运算。</p>
 <p>如果碰到了一个’(‘，其实我们可以看作’(‘和’)’里面的操作其实就是在重复操作没有括号的字符串运算，我们可以用一个递归的方式来解决（递归其实也可以用栈来解决，递归是借助JVM自身的方法递归栈，使用栈则是我们显示的定义栈，用递归代码会简洁些）。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculate224</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> curNum = <span class="number">0</span>, result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> lastOperator = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">        <span class="keyword">while</span> (index &lt; s.length()) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = s.charAt(index);</span><br><span class="line">            index++;</span><br><span class="line">            <span class="keyword">if</span> (ch == <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (ch &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">                curNum = curNum * <span class="number">10</span> + (ch - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&#x27;+&#x27;</span> || ch == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                    result += curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result -= curNum;</span><br><span class="line">                &#125;</span><br><span class="line">                lastOperator = ch;</span><br><span class="line">                curNum = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">                curNum = calculate(s);</span><br><span class="line">                <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                    result += curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result -= curNum;</span><br><span class="line">                &#125;</span><br><span class="line">                curNum = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">            result += curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result -= curNum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="LeetCode772-基本计算器III"><a href="#LeetCode772-基本计算器III" class="headerlink" title="LeetCode772 基本计算器III"></a>LeetCode772 基本计算器III</h5><p>基本计算器III这个题目就是字符串中右’+’、’-‘、’*’、’/‘、’(‘、’)’、空字符串，总共六种字符串。那么这个题目其实就是基本计算器I和基本计算II的加强版。所以这个题目就不做过多的分析，直接看代码就可以了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculate772</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> curNum = <span class="number">0</span>, lastNum = <span class="number">0</span>, result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> lastOperator = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">        <span class="keyword">while</span> (index &lt; s.length()) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = s.charAt(index);</span><br><span class="line">            ++index;</span><br><span class="line">            <span class="keyword">if</span> (ch &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">                curNum = curNum * <span class="number">10</span> + (ch - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&#x27;+&#x27;</span> || ch == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                    result += curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                    result -= curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                    result = lastNum * curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result = lastNum / curNum;</span><br><span class="line">                &#125;</span><br><span class="line">                curNum = <span class="number">0</span>;</span><br><span class="line">                lastNum = <span class="number">0</span>;</span><br><span class="line">                lastOperator = ch;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&#x27;*&#x27;</span> || ch == <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = -curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                    lastNum = lastNum * curNum;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    lastNum = lastNum / curNum;</span><br><span class="line">                &#125;</span><br><span class="line">                curNum = <span class="number">0</span>;</span><br><span class="line">                lastOperator = ch;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">                curNum = calculate(s);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">            result += curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">            result -= curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastOperator == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">            result = lastNum * curNum;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result = lastNum / curNum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -254,8 +266,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/07/Leetcode%E4%B8%93%E9%A2%98-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3+%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" rel="prev" title="Leetcode专题-滑动窗口+单调队列">
-      <i class="fa fa-chevron-left"></i> Leetcode专题-滑动窗口+单调队列
+    <a href="/2021/03/07/LeetCode%E4%B8%93%E9%A2%98-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3+%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" rel="prev" title="LeetCode专题-滑动窗口+单调队列">
+      <i class="fa fa-chevron-left"></i> LeetCode专题-滑动窗口+单调队列
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -316,7 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#LeetCode224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">LeetCode224 基本计算器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LeetCode224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-1"><span class="nav-number">2.</span> <span class="nav-text">LeetCode224 基本计算器</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#LeetCode224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8I"><span class="nav-number">1.</span> <span class="nav-text">LeetCode224 基本计算器I</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LeetCode224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8II"><span class="nav-number">2.</span> <span class="nav-text">LeetCode224 基本计算器II</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LeetCode772-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8III"><span class="nav-number">3.</span> <span class="nav-text">LeetCode772 基本计算器III</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,6 +433,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
