@@ -244,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-30 20:28:56 / 修改时间：20:48:41" itemprop="dateCreated datePublished" datetime="2021-04-30T20:28:56+08:00">2021-04-30</time>
+              <time title="创建时间：2021-04-30 20:28:56" itemprop="dateCreated datePublished" datetime="2021-04-30T20:28:56+08:00">2021-04-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-02 11:29:43" itemprop="dateModified" datetime="2021-05-02T11:29:43+08:00">2021-05-02</time>
+              </span>
 
           
 
@@ -260,23 +266,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="LeetCode79-单词搜索"><a href="#LeetCode79-单词搜索" class="headerlink" title="LeetCode79 单词搜索"></a>LeetCode79 单词搜索</h4><p>给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
-<p>Case1:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;E&quot;</span>],[<span class="string">&quot;S&quot;</span>,<span class="string">&quot;F&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;S&quot;</span>],[<span class="string">&quot;A&quot;</span>,<span class="string">&quot;D&quot;</span>,<span class="string">&quot;E&quot;</span>,<span class="string">&quot;E&quot;</span>]], word = <span class="string">&quot;ABCCED&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>Case2:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;E&quot;</span>],[<span class="string">&quot;S&quot;</span>,<span class="string">&quot;F&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;S&quot;</span>],[<span class="string">&quot;A&quot;</span>,<span class="string">&quot;D&quot;</span>,<span class="string">&quot;E&quot;</span>,<span class="string">&quot;E&quot;</span>]], word = <span class="string">&quot;SEE&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>Case3:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;E&quot;</span>],[<span class="string">&quot;S&quot;</span>,<span class="string">&quot;F&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;S&quot;</span>],[<span class="string">&quot;A&quot;</span>,<span class="string">&quot;D&quot;</span>,<span class="string">&quot;E&quot;</span>,<span class="string">&quot;E&quot;</span>]], word = <span class="string">&quot;ABCB&quot;</span></span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>分析：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Exist79</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">exist</span><span class="params">(<span class="keyword">char</span>[][] board, String word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] visited = <span class="keyword">new</span> <span class="keyword">int</span>[board.length][board[<span class="number">0</span>].length];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;board.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;board[<span class="number">0</span>].length;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(exist(board,word,visited, i,j,<span class="number">0</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">exist</span><span class="params">(<span class="keyword">char</span>[][] board,String word,<span class="keyword">int</span>[][] visited,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index  == word.length())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i &gt; -<span class="number">1</span> &amp;&amp; i &lt; board.length &amp;&amp;</span><br><span class="line">                j &gt; -<span class="number">1</span> &amp;&amp; j &lt; board[<span class="number">0</span>].length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(visited[i][j] == <span class="number">0</span> &amp;&amp; board[i][j] == word.charAt(index))&#123;</span><br><span class="line">                visited[i][j] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(exist(board,word,visited, i - <span class="number">1</span>,j,index + <span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(exist(board,word,visited, i + <span class="number">1</span>,j,index + <span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(exist(board,word,visited, i,j - <span class="number">1</span>,index + <span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(exist(board,word,visited, i,j + <span class="number">1</span>,index + <span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                visited[i][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="LeetCode212-单词搜索-II"><a href="#LeetCode212-单词搜索-II" class="headerlink" title="LeetCode212 单词搜索 II"></a>LeetCode212 单词搜索 II</h4><p>题目描述：给定一个 m x n 二维字符网格 board 和一个单词（字符串）列表 words，找出所有同时在二维网格和字典中出现的单词。单词必须按照字母顺序，通过 相邻的单元格 内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</p>
-<p>Case1:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;o&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;n&quot;</span>],[<span class="string">&quot;e&quot;</span>,<span class="string">&quot;t&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;e&quot;</span>],[<span class="string">&quot;i&quot;</span>,<span class="string">&quot;h&quot;</span>,<span class="string">&quot;k&quot;</span>,<span class="string">&quot;r&quot;</span>],[<span class="string">&quot;i&quot;</span>,<span class="string">&quot;f&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;v&quot;</span>]], words = [<span class="string">&quot;oath&quot;</span>,<span class="string">&quot;pea&quot;</span>,<span class="string">&quot;eat&quot;</span>,<span class="string">&quot;rain&quot;</span>]</span><br><span class="line">输出：[<span class="string">&quot;eat&quot;</span>,<span class="string">&quot;oath&quot;</span>]</span><br></pre></td></tr></table></figure>
-<p>Case2:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;c&quot;</span>,<span class="string">&quot;d&quot;</span>]], words = [<span class="string">&quot;abcb&quot;</span>]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
-
-
-
+          <p>广度优先遍历算法是图论中的算法，广度优先遍历使用优先队列的数据结构实现，节点先进先出。相比较于深度优先遍历，是后进先出。广度优先遍历需要用一个染色数据结构记录节点是否有被遍历到。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/30/LeetCode%E4%B8%93%E9%A2%98-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -654,7 +652,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-28 10:25:35" itemprop="dateModified" datetime="2021-03-28T10:25:35+08:00">2021-03-28</time>
+                <time title="修改时间：2021-05-02 15:47:26" itemprop="dateModified" datetime="2021-05-02T15:47:26+08:00">2021-05-02</time>
               </span>
 
           
@@ -719,10 +717,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-20 12:08:17 / 修改时间：22:08:53" itemprop="dateCreated datePublished" datetime="2021-03-20T12:08:17+08:00">2021-03-20</time>
+              <time title="创建时间：2021-03-20 12:08:17" itemprop="dateCreated datePublished" datetime="2021-03-20T12:08:17+08:00">2021-03-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-02 15:48:08" itemprop="dateModified" datetime="2021-05-02T15:48:08+08:00">2021-05-02</time>
+              </span>
 
           
 
@@ -736,6 +740,12 @@
 
       
           <p>滑动窗口专题往往题目的描述都是，给定一个固定的长度，然后在目标数组和字符串中寻找满足固定长度的字数组或者是子字符串。这类题目，通常采用双指针构造固定长度的滑动窗口，但是有时也需要借助其他的一些数据结构满足这类题目。</p>
+<p>滑动窗口总体的步骤：</p>
+<ul>
+<li>构造滑动窗口，通过题目给定的固定长度，采用双指针left和right指针来维护一个固定大小的窗口。</li>
+<li>存储窗口内数据，采用HashMap、大顶堆或者小顶堆、优先队列、单调队列等各种数据结构存储窗口内数据</li>
+<li>滑动窗口，如果碰到不满足条件的数据有两种操作，一种是重置窗口起始位置（将左右指针移动到当前数据下一个位置），另一种是移动窗口的右指针，直到窗口内的数据满足条件为止。</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/03/20/LeetCode%E4%B8%93%E9%A2%98-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/#more" rel="contents">
