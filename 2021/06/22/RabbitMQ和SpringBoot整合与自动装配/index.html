@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Rabbit MQ和Spring Boot MQ 今天在上班的时候有一个项目，因为没有配置对应的MQ，而导致对象初始化的时候会报异常。首先自己的项目是没有一个使用Rabbit MQ的，因此不想因为代码中需要MQ配置或者队列就去申请一个多余的队列，同时浪费多余的线程来监听消息的更新。那么我就需要去修改MQ的初始化组件了，当我看到初始化组件的时候，有一种莫名的头疼，我有一种预感，就是同事写的代码并不是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2021/02/11/hello-world/index.html">
+<meta property="og:title" content="zbtmaker">
+<meta property="og:url" content="http://example.com/2021/06/22/RabbitMQ%E5%92%8CSpringBoot%E6%95%B4%E5%90%88%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/index.html">
 <meta property="og:site_name" content="zbtmaker">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Rabbit MQ和Spring Boot MQ 今天在上班的时候有一个项目，因为没有配置对应的MQ，而导致对象初始化的时候会报异常。首先自己的项目是没有一个使用Rabbit MQ的，因此不想因为代码中需要MQ配置或者队列就去申请一个多余的队列，同时浪费多余的线程来监听消息的更新。那么我就需要去修改MQ的初始化组件了，当我看到初始化组件的时候，有一种莫名的头疼，我有一种预感，就是同事写的代码并不是">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-11T04:32:06.258Z">
-<meta property="article:modified_time" content="2021-02-11T06:00:29.341Z">
+<meta property="article:published_time" content="2021-06-22T15:21:33.250Z">
+<meta property="article:modified_time" content="2021-06-22T16:04:45.083Z">
 <meta property="article:author" content="邹柏涛">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/02/11/hello-world/">
+<link rel="canonical" href="http://example.com/2021/06/22/RabbitMQ%E5%92%8CSpringBoot%E6%95%B4%E5%90%88%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Hello World | zbtmaker</title>
+  <title> | zbtmaker</title>
   
 
 
@@ -151,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/11/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/22/RabbitMQ%E5%92%8CSpringBoot%E6%95%B4%E5%90%88%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          
         </h1>
 
         <div class="post-meta">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-02-11 12:32:06 / 修改时间：14:00:29" itemprop="dateCreated datePublished" datetime="2021-02-11T12:32:06+08:00">2021-02-11</time>
+              <time title="创建时间：2021-06-22 23:21:33" itemprop="dateCreated datePublished" datetime="2021-06-22T23:21:33+08:00">2021-06-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-23 00:04:45" itemprop="dateModified" datetime="2021-06-23T00:04:45+08:00">2021-06-23</time>
+              </span>
 
           
 
@@ -189,15 +195,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>Rabbit MQ和Spring Boot MQ</p>
+<p>今天在上班的时候有一个项目，因为没有配置对应的MQ，而导致对象初始化的时候会报异常。首先自己的项目是没有一个使用Rabbit MQ的，因此不想因为代码中需要MQ配置或者队列就去申请一个多余的队列，同时浪费多余的线程来监听消息的更新。那么我就需要去修改MQ的初始化组件了，当我看到初始化组件的时候，有一种莫名的头疼，我有一种预感，就是同事写的代码并不是为了提升效率，而是为了让别人无法看懂，从而保证自己在这个公司是不可替代性的。为了看懂代码并在代码中加入相应的注视，那本周就需要通过对RabbitMQ和Spring以及Spring Boot的了解来写一篇文章，从而让自己和别人都能够了解哪些看起来高大上的组件，其实很多东西都特别简单。我的宗旨在于让编程更加简单同时让阅读源码成为一件简单的事情</p>
+<h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p>以前从没有思考过RabbitMQ，RabbitMQ就是消息队列，生产者将消息生产之后存储在队列中，而消费者从队列中消费队列中的消息，因此生产者和消费者其实都是与消费这相连。我们来看一下消费者是如何进行连接的，消费者和消息队列之间连接是通过网络连接的，那么就需要host和port，此外还需要账户和密码。连接需要的必备元素准备好了，那么采用何种协议（amqp、http或者是其他）就不重要了。RabbitMQ的Java版本客户端中建立连接是通过ConnectionFactory来创建对应的Connection，而Connection可以指定消费的Channel。</p>
+<h3 id="Spring和SpringBoot"><a href="#Spring和SpringBoot" class="headerlink" title="Spring和SpringBoot"></a>Spring和SpringBoot</h3><p>Spring Boot这个框架如果抛开组合Tomcat等Servlet容器特性，从Bean初始化的角度来看，其实就是让Bean初始化更加简单，怎么简单呢？就是通过配置文件，并定义一定的规则，如果在配置文件中能够找到满足条件的配置，那么我们就初始化对应的Bean。现在问题很简单。我们举一个简单的例子，如果我们要初始化Rabbit MQ消费者或者生产者，我们只需要将创建Rabbit MQ消费这相关的配置配置在配置文件中。</p>
+<p>那么SpringBoot的自动装配功能是如何实现的呢？其实我们之前在阅读Spring源码的时候，容器初始化时发现有个很重要的接口–BeanFactoryPostProcessor。我们可以从Spring 官网上了解这两个接口的功能。</p>
+<p>If you want to change the actual bean instances (that is, the objects that are created from the configuration metadata), then you instead need to use a <code>BeanPostProcessor</code> (described earlier in <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-bpp">Customizing Beans by Using a <code>BeanPostProcessor</code></a>). While it is technically possible to work with bean instances within a <code>BeanFactoryPostProcessor</code> (for example, by using <code>BeanFactory.getBean()</code>), doing so causes premature bean instantiation, violating the standard container lifecycle. This may cause negative side effects, such as bypassing bean post processing.</p>
+<p>Also, <code>BeanFactoryPostProcessor</code> instances are scoped per-container. This is only relevant if you use container hierarchies. If you define a <code>BeanFactoryPostProcessor</code> in one container, it is applied only to the bean definitions in that container. Bean definitions in one container are not post-processed by <code>BeanFactoryPostProcessor</code> instances in another container, even if both containers are part of the same hierarchy.</p>
+<p>而BeanFactoryPostProcessor的功能就是在Spring容器初始化之后，在Bean实例初始化之前可以修改BeanDefinition（这个功能和我们在使用@Value注解或者是PropertyPlaceholderConfigurer修改占为符是一个道理）。除了修改BeanDefinition，其实我们也往Spring容器中添加对应的 BeanDefinition。而Spring Boot就是借助这个想法</p>
 
     </div>
 
@@ -213,13 +218,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/31/Spring%20Aop%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86-%20prerequisite/" rel="prev" title="Spring Aop动态代理- Prerequisite">
-      <i class="fa fa-chevron-left"></i> Spring Aop动态代理- Prerequisite
+    <a href="/2021/05/01/LeetCode%E4%B8%93%E9%A2%98-%E5%89%8D%E7%BC%80%E6%A0%91/" rel="prev" title="LeetCode专题-前缀树">
+      <i class="fa fa-chevron-left"></i> LeetCode专题-前缀树
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/20/LeetCode%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/" rel="next" title="LeetCode最大连续1的个数">
-      LeetCode最大连续1的个数 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -278,7 +280,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%92%8CSpringBoot"><span class="nav-number">2.</span> <span class="nav-text">Spring和SpringBoot</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
