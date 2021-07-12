@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、动态代理如何理解代理这个事情，其实就是对原生类进行加强。对于Jdk动态代理，需要三个要素，一个是要被代理的接口，一个是对其增强的InvocationHandler，然后另一个就是Proxy用来生成代理的类。那么我们是否需要回答为什么需要代理这个操作，那我们暂且搁置这个问题。 那么我们看一下Cglib的代理方式，那么就是Enhancer相当于Proxy操作。那么Jdk动态代理的操作是什么呢？就是">
+  <meta name="description" content="一、动态代理如何理解代理这个事情，其实就是对原生类进行加强。对于Jdk动态代理，需要三个要素，一个是要被代理的接口，一个是对其增强的InvocationHandler，然后另一个就是Proxy用来生成代理的类。那么我们是否需要回答为什么需要代理这个操作，那我们暂且搁置这个问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Aop动态代理- Prerequisite">
 <meta property="og:url" content="http://example.com/2020/12/31/Spring%20Aop%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86-%20prerequisite/index.html">
 <meta property="og:site_name" content="zbtmaker">
-<meta property="og:description" content="一、动态代理如何理解代理这个事情，其实就是对原生类进行加强。对于Jdk动态代理，需要三个要素，一个是要被代理的接口，一个是对其增强的InvocationHandler，然后另一个就是Proxy用来生成代理的类。那么我们是否需要回答为什么需要代理这个操作，那我们暂且搁置这个问题。 那么我们看一下Cglib的代理方式，那么就是Enhancer相当于Proxy操作。那么Jdk动态代理的操作是什么呢？就是">
+<meta property="og:description" content="一、动态代理如何理解代理这个事情，其实就是对原生类进行加强。对于Jdk动态代理，需要三个要素，一个是要被代理的接口，一个是对其增强的InvocationHandler，然后另一个就是Proxy用来生成代理的类。那么我们是否需要回答为什么需要代理这个操作，那我们暂且搁置这个问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-31T14:43:30.101Z">
-<meta property="article:modified_time" content="2021-03-14T15:07:13.086Z">
+<meta property="article:modified_time" content="2021-07-12T04:00:06.674Z">
 <meta property="article:author" content="邹柏涛">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 23:07:13" itemprop="dateModified" datetime="2021-03-14T23:07:13+08:00">2021-03-14</time>
+                <time title="修改时间：2021-07-12 12:00:06" itemprop="dateModified" datetime="2021-07-12T12:00:06+08:00">2021-07-12</time>
               </span>
 
           
@@ -197,6 +197,8 @@
 
       
         <h2 id="一、动态代理"><a href="#一、动态代理" class="headerlink" title="一、动态代理"></a>一、动态代理</h2><p>如何理解代理这个事情，其实就是对原生类进行加强。对于Jdk动态代理，需要三个要素，一个是要被代理的接口，一个是对其增强的InvocationHandler，然后另一个就是Proxy用来生成代理的类。那么我们是否需要回答为什么需要代理这个操作，那我们暂且搁置这个问题。</p>
+<a id="more"></a>
+
 <p>那么我们看一下Cglib的代理方式，那么就是Enhancer相当于Proxy操作。那么Jdk动态代理的操作是什么呢？就是Method Interceptor，那就齐活了。</p>
 <p>现在我们来看一下Spring中是如何处理的呢？Spring为了结合这两者，做了哪些改进呢？第一因为用AopProxy用来抽象Proxy和Enhancer。AopProxy做了什么事情呢？就是提供了一个get Proxy方法，这个方法能够抽象处创建Proxy的接口。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AopProxy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Create a new proxy object.</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;Uses the AopProxy&#x27;s default class loader (if necessary for proxy creation):</span></span><br><span class="line"><span class="comment">	 * usually, the thread context class loader.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the new proxy object (never &#123;<span class="doctag">@code</span> null&#125;)</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@see</span> Thread#getContextClassLoader()</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function">Object <span class="title">getProxy</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Create a new proxy object.</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;Uses the given class loader (if necessary for proxy creation).</span></span><br><span class="line"><span class="comment">	 * &#123;<span class="doctag">@code</span> null&#125; will simply be passed down and thus lead to the low-level</span></span><br><span class="line"><span class="comment">	 * proxy facility&#x27;s default, which is usually different from the default chosen</span></span><br><span class="line"><span class="comment">	 * by the AopProxy implementation&#x27;s &#123;<span class="doctag">@link</span> #getProxy()&#125; method.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> classLoader the class loader to create the proxy with</span></span><br><span class="line"><span class="comment">	 * (or &#123;<span class="doctag">@code</span> null&#125; for the low-level proxy facility&#x27;s default)</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the new proxy object (never &#123;<span class="doctag">@code</span> null&#125;)</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function">Object <span class="title">getProxy</span><span class="params">(<span class="meta">@Nullable</span> ClassLoader classLoader)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
